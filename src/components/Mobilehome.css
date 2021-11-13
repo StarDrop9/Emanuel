@@ -1,0 +1,220 @@
+@keyframes example {
+  from {
+    /* width: 40px;
+    height: 40px;
+    opacity: 1; */
+    transform: scale(1.1);
+    /* filter: hue-rotate(180deg); */
+  }
+  to {
+    /* width: 0px;
+    height: 0px; */
+    opacity: 0;
+    transform: scale(0.01);
+    /* filter: hue-rotate(0deg); */
+  }
+}
+
+.mobile-div1 {
+  position: relative;
+  top: calc(20% - 20px);
+  left: calc(1% - 140px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 60px 30px #fff, 0 0 100px 60px #f0f, 0 0 140px 90px #0ff;
+  z-index: 100;
+  animation-name: example;
+  animation-duration: 7s;
+  animation-fill-mode: both;
+}
+
+.mobile-fade-in-text {
+  position: relative;
+  top: calc(1% - 20px);
+  left: calc(10% - 20px);
+  width: 300px;
+  height: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  color: white;
+  animation: fadeIn linear 7s;
+  -webkit-animation: fadeIn linear 7s;
+  -moz-animation: fadeIn linear 7s;
+  -o-animation: fadeIn linear 7s;
+  -ms-animation: fadeIn linear 7s;
+  z-index: 300;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.mobile-animated-grid {
+  height: 92vh;
+  margin-bottom: 100px;
+  margin-top: 50%;
+  display: grid;
+  row-gap: 1rem;
+
+  /* Explicit grid */
+  grid-template-areas:
+    "a"
+    "b"
+    "c";
+  /* "d" */
+  /* "e" */
+  /* "🌟"; */
+
+  grid-template-rows: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+  grid-template-columns: 1fr;
+
+  --stagger-delay: 100ms;
+}
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+.mcard {
+  background-color: rgb(36, 243, 147);
+  animation: cardEntrance 700ms ease-out;
+  animation-fill-mode: backwards;
+}
+
+.mcard:nth-child(1) {
+  grid-area: a;
+  animation-delay: calc(1 * var(--stagger-delay));
+}
+.mcard:nth-child(2) {
+  grid-area: b;
+  animation-delay: calc(2 * var(--stagger-delay));
+}
+.mcard:nth-child(3) {
+  grid-area: c;
+  animation-delay: calc(3 * var(--stagger-delay));
+}
+.mcard:nth-child(4) {
+  grid-area: d;
+  animation-delay: calc(4 * var(--stagger-delay));
+}
+.mcard:nth-child(5) {
+  grid-area: e;
+  animation-delay: calc(5 * var(--stagger-delay));
+}
+.mcard:nth-child(6) {
+  grid-area: f;
+  animation-delay: calc(6 * var(--stagger-delay));
+}
+.mcard:nth-child(7) {
+  grid-area: g;
+  animation-delay: calc(7 * var(--stagger-delay));
+}
+.mcard:nth-child(8) {
+  grid-area: h;
+  animation-delay: calc(8 * var(--stagger-delay));
+}
+.mcard:nth-child(9) {
+  grid-area: i;
+  animation-delay: calc(9 * var(--stagger-delay));
+}
+.mcard:nth-child(10) {
+  grid-area: j;
+  animation-delay: calc(10 * var(--stagger-delay));
+}
+.mcard:nth-child(11) {
+  grid-area: k;
+  animation-delay: calc(11 * var(--stagger-delay));
+}
+.mcard:nth-child(12) {
+  grid-area: l;
+  animation-delay: calc(12 * var(--stagger-delay));
+}
+
+.mcard:nth-child(13) {
+  grid-area: m;
+  animation-delay: calc(13 * var(--stagger-delay));
+}
+
+.mcard:last-child {
+  grid-area: 🌟;
+  animation-delay: calc(13 * var(--stagger-delay));
+}
+
+.mcard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #353535;
+  font-size: 3rem;
+  color: #fff;
+  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem,
+    rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+  height: 150px;
+  width: 90%;
+  margin-left: 3%;
+  border-radius: 10px;
+  transition: all 1000ms;
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mcard:hover {
+  box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em,
+    rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  transform: translateY(-3px) scale(1.1);
+}

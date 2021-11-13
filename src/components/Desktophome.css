@@ -1,0 +1,189 @@
+@keyframes example {
+  from {
+    /* width: 40px;
+      height: 40px;
+      opacity: 1; */
+    transform: scale(1.1);
+    /* filter: hue-rotate(180deg); */
+  }
+  to {
+    /* width: 0px;
+      height: 0px; */
+    opacity: 0;
+    transform: scale(0.01);
+    /* filter: hue-rotate(0deg); */
+  }
+}
+
+.desktop-div1 {
+  /* position: relative;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px); */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 60px 30px #fff, 0 0 100px 60px #f0f, 0 0 140px 90px #0ff;
+  animation-name: example;
+  animation-duration: 7s;
+  animation-fill-mode: both;
+}
+
+.fade-in-text {
+  position: relative;
+  text-align: center !important;
+  width: 500px;
+  height: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: rgb(250, 248, 248);
+  animation: fadeIn linear 7s;
+  -webkit-animation: fadeIn linear 7s;
+  -moz-animation: fadeIn linear 7s;
+  -o-animation: fadeIn linear 7s;
+  -ms-animation: fadeIn linear 7s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.desktop-animated-grid {
+  width: 96vw;
+  height: 92vh;
+  margin-bottom: 100px;
+  margin-left: 2%;
+  display: grid;
+  gap: 1rem;
+
+  /* Explicit grid */
+  grid-template-areas:
+    "a   b  c   d"
+    "l  🌟 🌟  e"
+    "k  🌟 🌟  f"
+    "j   i  h   g";
+
+  grid-template-rows: 1.4fr, 0.8fr, 0.8fr, 1.4fr;
+  grid-template-columns: 15% auto auto 15%;
+
+  --stagger-delay: 100ms;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+.card {
+  background-color: rgb(36, 243, 147);
+  animation: cardEntrance 700ms ease-out;
+  animation-fill-mode: backwards;
+}
+
+.card:nth-child(1) {
+  grid-area: a;
+  animation-delay: calc(1 * var(--stagger-delay));
+}
+.card:nth-child(2) {
+  grid-area: b;
+  animation-delay: calc(2 * var(--stagger-delay));
+}
+.card:nth-child(3) {
+  grid-area: c;
+  animation-delay: calc(3 * var(--stagger-delay));
+}
+.card:nth-child(4) {
+  grid-area: d;
+  animation-delay: calc(4 * var(--stagger-delay));
+}
+.card:nth-child(5) {
+  grid-area: e;
+  animation-delay: calc(5 * var(--stagger-delay));
+}
+.card:nth-child(6) {
+  grid-area: f;
+  animation-delay: calc(6 * var(--stagger-delay));
+}
+.card:nth-child(7) {
+  grid-area: g;
+  animation-delay: calc(7 * var(--stagger-delay));
+}
+.card:nth-child(8) {
+  grid-area: h;
+  animation-delay: calc(8 * var(--stagger-delay));
+}
+.card:nth-child(9) {
+  grid-area: i;
+  animation-delay: calc(9 * var(--stagger-delay));
+}
+.card:nth-child(10) {
+  grid-area: j;
+  animation-delay: calc(10 * var(--stagger-delay));
+}
+.card:nth-child(11) {
+  grid-area: k;
+  animation-delay: calc(11 * var(--stagger-delay));
+}
+.card:nth-child(12) {
+  grid-area: l;
+  animation-delay: calc(12 * var(--stagger-delay));
+}
+
+.card:nth-child(13) {
+  grid-area: m;
+  animation-delay: calc(13 * var(--stagger-delay));
+}
+
+.card:last-child {
+  grid-area: 🌟;
+  animation-delay: calc(13 * var(--stagger-delay));
+}
