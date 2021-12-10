@@ -39,7 +39,7 @@ function HeroSection() {
     "Come to me all who are weary and burdened and I will give you rest.",
     "Consider it pure joy, my brothers and sisters,whenever you face trials of many kinds",
     "In the darkness of adversity, you are able to see more clearly the radiance of My face.",
-    "Remember that you have an eternity of trouble-free living awaiting you in Heaven.",
+    "Remember that you have an eternity of trouble-free  living awaiting you in Heaven.",
   ]);
 
   // eslint-disable-next-line
