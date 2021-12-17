@@ -41,6 +41,9 @@ function HeroSection() {
     "In the darkness of adversity, you are able to see more clearly the radiance of My face.",
     "Remember that you have an eternity of trouble-free living awaiting you in Heaven.",
     "in all your ways submit to me,and I will make your paths straight",
+    "Blessed are the poor in spirit, for theirs is the kingdom of heaven.",
+    "For in Christ all the fullness of the Deity lives in bodily form, 10 and in Christ you have been brought to fullness. He is the head over every power and authority.",
+    "Let everything that has breath praise the Lord.",
   ]);
 
   // eslint-disable-next-line
