@@ -22,6 +22,8 @@ function HeroSection() {
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
 
   const [parables] = useState([
+    "I was",
+    "With You I will be",
     "Be still, and know that I am God",
     "This is my Son, whom I Love.",
     "With him I am well pleased!",
