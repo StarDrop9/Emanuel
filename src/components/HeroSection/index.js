@@ -47,6 +47,7 @@ function HeroSection() {
     "For you know the grace of our Lord Jesus Christ, that though he was rich, yet for your sake he became poor, so that you through his poverty might become rich.",
     "Those who hope in the Lord will renew their strength.They will soar on wings like eagles",
     "Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.",
+    "I died for you",
   ]);
 
   // eslint-disable-next-line
