@@ -52,6 +52,8 @@ function HeroSection() {
     "The Lord your God is with you, the Mighty Warrior who saves.",
     "He will take great delight in you in his love he will no longer rebuke you, but will rejoice over you with singing.",
     "I died for you",
+    "Worthy is the lamb who was sacrificed for you.",
+    "And my Father raised me from death to live forever at his side.",
   ]);
 
   // eslint-disable-next-line
