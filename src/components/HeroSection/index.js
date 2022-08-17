@@ -56,6 +56,7 @@ function HeroSection() {
     "And my Father raised me from death to live forever at his side.",
     "but those who hope in the Lord will renew their strength.",
     "They will soar on wings like eagles, they will run and not grow weary,they will walk and not be faint.",
+    "Finally, brothers and sisters, whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable—if anything is excellent or praiseworthy—think about such things.",
   ]);
 
   // eslint-disable-next-line
