@@ -54,6 +54,8 @@ function HeroSection() {
     "I died for you",
     "Worthy is the lamb who was sacrificed for you.",
     "And my Father raised me from death to live forever at his side.",
+    "but those who hope in the Lord will renew their strength.",
+    "They will soar on wings like eagles, they will run and not grow weary,they will walk and not be faint.",
   ]);
 
   // eslint-disable-next-line
