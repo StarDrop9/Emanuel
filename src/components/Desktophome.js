@@ -16,7 +16,7 @@ const Desktophome = (props) => {
         timer.current = setTimeout(function () {
           //console.log("value is ", i);
           setParable(parables[i]);
-        }, 5000 * (i + 1));
+        }, 6000 * (i + 1));
       })(i);
     }
     return () => {
