@@ -77,12 +77,7 @@ const Desktophome = ({ parables, currentParable }) => {
           //style={{backgroundImage:"url('https://images.unsplash.com/photo-1583562835057-a62d1beffbf3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
         ></div>
 
-        <div
-          onClick={() => toggleFlip()}
-          className="card"
-          //style={{ backgroundImage: "url(/assets/rollawaythestone.jpeg)" }}
-          // style={{backgroundImage:"url('https://images.unsplash.com/photo-1583518257225-f9a8081f6a84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
-        >
+        <div onClick={() => toggleFlip()} className="card">
           <div className="theback">
             <h1 style={{ color: "black" }}>Back of Card</h1>
             <p>You set flip to {flip} </p>
@@ -90,9 +85,13 @@ const Desktophome = ({ parables, currentParable }) => {
 
           <div
             className="thefront"
-            // style={{ backgroundImage: "url(/assets/rollawaythestone.jpeg)" }}
+            style={{
+              backgroundImage: "url(/assets/rollawaythestone.jpeg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
           >
-            <h1>Front of Card</h1>
+            {/* Remove the text from here */}
           </div>
         </div>
 
