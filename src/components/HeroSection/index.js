@@ -67,11 +67,10 @@ function HeroSection({ onParableChange }) {
           },
           body: JSON.stringify({
             text: text,
+            model_id: "eleven_turbo_v2_5",
             voice_settings: {
               stability: 0.75,
               similarity_boost: 0.75,
-              style: 0.0,
-              speaking_rate: 0.9,
             },
           }),
         }
