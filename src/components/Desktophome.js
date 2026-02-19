@@ -52,7 +52,7 @@ const Desktophome = ({ parables, currentParable }) => {
         ></div>
         <div
           className="card"
-          style={{ backgroundImage: "url(/assets/JesusReaching.webp)", backgroundSize: "cover", backgroundPosition: "center top" }}
+          style={{ backgroundImage: "url(/assets/JesusReaching.webp)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundColor: "#000" }}
         ></div>
         <div
           className="card"
@@ -67,8 +67,7 @@ const Desktophome = ({ parables, currentParable }) => {
         ></div>
         <div
           className="card"
-          style={{ backgroundImage: "url(/assets/angelwcross2.jpg)" }}
-          //style={{backgroundImage:"url('https://images.unsplash.com/photo-1583562835057-a62d1beffbf3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
+          style={{ backgroundImage: "url(/assets/JesusReaching.webp)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundColor: "#000" }}
         ></div>
 
         <div onClick={() => toggleFlip()} className="card">
