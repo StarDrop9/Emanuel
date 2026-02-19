@@ -138,6 +138,11 @@
   animation: cardEntrance 700ms ease-out;
   animation-fill-mode: backwards;
   transform-style: preserve-3d;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   /* transition: all 0.8s ease; */
 }
 
