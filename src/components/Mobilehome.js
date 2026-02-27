@@ -7,6 +7,7 @@ const Mobilehome = (props) => {
   let parables = props.parables;
 
   const timer = useRef(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     //Goal of this code Return a random parable every 3 seconds
@@ -23,6 +24,15 @@ const Mobilehome = (props) => {
       clearTimeout(timer.current);
     };
   }, [parables]);
+
+  useEffect(() => {
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
+    if (!parable || !('speechSynthesis' in window)) return;
+    const utterance = new SpeechSynthesisUtterance(parable);
+    utterance.rate = 0.8;
+    utterance.pitch = 1.0;
+    window.speechSynthesis.speak(utterance);
+  }, [parable]);
   return (
     <section className="mobile-animated-grid">
       <div
