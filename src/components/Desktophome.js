@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Desktophome.css";
 
 const Desktophome = ({ parables, currentParable }) => {
   const [flip, setFlip] = useState(true);
   const toggleFlip = () => setFlip((value) => !value);
 
-  useEffect(() => {
-    if (!currentParable || !('speechSynthesis' in window)) return;
-    const utterance = new SpeechSynthesisUtterance(currentParable);
-    utterance.rate = 0.8;
-    utterance.pitch = 1.0;
-    window.speechSynthesis.speak(utterance);
-  }, [currentParable]);
   return (
     <div>
       <section className="desktop-animated-grid">
