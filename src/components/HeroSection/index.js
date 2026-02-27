@@ -55,44 +55,27 @@ function HeroSection({ onParableChange }) {
     setHover(!hover);
   };
 
-  const speakText = useCallback(async (text) => {
-    try {
-      const response = await fetch(
-        `https://api.elevenlabs.io/v1/text-to-speech/${process.env.REACT_APP_ELEVEN_LABS_VOICE_ID}`,
-        {
-          method: "POST",
-          headers: {
-            "xi-api-key": process.env.REACT_APP_ELEVEN_LABS_API_KEY,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            text: text,
-            model_id: "eleven_turbo_v2_5",
-            voice_settings: {
-              stability: 0.75,
-              similarity_boost: 0.75,
-            },
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const audioBlob = await response.blob();
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
-      await audio.play();
-    } catch (error) {
-      console.error("Error:", error);
-    }
+  const speakText = useCallback((text) => {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.9;
+    utterance.pitch = 1.0;
+    const voices = window.speechSynthesis.getVoices();
+    const preferred = voices.find(
+      (v) =>
+        v.name.includes("Google") ||
+        v.name.includes("Samantha") ||
+        v.name.includes("Daniel")
+    );
+    if (preferred) utterance.voice = preferred;
+    window.speechSynthesis.speak(utterance);
   }, []);
 
   const changeSaying = useCallback(
-    async (newSaying) => {
+    (newSaying) => {
       setCurrentParable(newSaying);
-      await speakText(newSaying);
+      speakText(newSaying);
       if (onParableChange) {
         onParableChange(newSaying);
       }
@@ -108,11 +91,11 @@ function HeroSection({ onParableChange }) {
     changeSaying("I Am");
 
     // Start the interval for subsequent parables
-    interval = setInterval(async () => {
+    interval = setInterval(() => {
       if (isActive) {
         const randomSaying =
           parables[Math.floor(Math.random() * parables.length)];
-        await changeSaying(randomSaying);
+        changeSaying(randomSaying);
       }
     }, 7000);
 
