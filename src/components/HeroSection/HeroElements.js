@@ -132,7 +132,6 @@ export const GearBtn = styled.button`
   cursor: pointer;
   color: #fff;
   font-size: 20px;
-  backdrop-filter: blur(6px);
   transition: background 0.2s, transform 0.3s;
 
   &:hover {
@@ -146,13 +145,12 @@ export const VoicePanel = styled.div`
   top: 66px;
   right: 16px;
   z-index: 9999;
-  background: rgba(15, 15, 25, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #1a1a2e;
+  border: 1px solid rgba(167, 139, 250, 0.4);
   border-radius: 12px;
   padding: 16px;
-  min-width: 240px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  min-width: 260px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   color: #fff;
 
   h4 {
