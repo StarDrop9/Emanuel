@@ -117,10 +117,10 @@ export const ArrowRight = styled(MdKeyboardArrowRight)`
 `;
 
 export const GearBtn = styled.button`
-  position: absolute;
+  position: fixed;
   top: 16px;
   right: 16px;
-  z-index: 10;
+  z-index: 9999;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 50%;
@@ -142,10 +142,10 @@ export const GearBtn = styled.button`
 `;
 
 export const VoicePanel = styled.div`
-  position: absolute;
+  position: fixed;
   top: 66px;
   right: 16px;
-  z-index: 10;
+  z-index: 9999;
   background: rgba(15, 15, 25, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;

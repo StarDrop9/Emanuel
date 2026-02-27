@@ -65,12 +65,11 @@ function HeroSection({ onParableChange }) {
       const v = window.speechSynthesis.getVoices();
       if (v.length) {
         setVoices(v);
-        const preferred = v.find(
-          (x) =>
-            x.name.includes("Google") ||
-            x.name.includes("Samantha") ||
-            x.name.includes("Daniel")
-        );
+        const preferred =
+          v.find((x) => x.name === "Google UK English Female") ||
+          v.find((x) => x.name === "Samantha") ||
+          v.find((x) => x.name.includes("Google US English")) ||
+          v.find((x) => x.name.includes("Google"));
         setSelectedVoiceName((cur) => cur || (preferred ? preferred.name : v[0].name));
       }
     };
