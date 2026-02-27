@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useMediaQuery } from "react-responsive";
 import Desktophome from "../../components/Desktophome";
 import Mobilehome from "../../components/Mobilehome";
@@ -133,7 +134,7 @@ function HeroSection({ onParableChange }) {
         <FiSettings />
       </GearBtn>
 
-      {settingsOpen && (
+      {settingsOpen && ReactDOM.createPortal(
         <VoicePanel>
           <h4>Voice Settings</h4>
           <select
@@ -157,7 +158,8 @@ function HeroSection({ onParableChange }) {
               onChange={(e) => setRate(parseFloat(e.target.value))}
             />
           </label>
-        </VoicePanel>
+        </VoicePanel>,
+        document.body
       )}
 
       <HeroContent>
