@@ -130,9 +130,12 @@ function HeroSection({ onParableChange }) {
 
   return (
     <HeroContainer id="home">
-      <GearBtn onClick={() => { setSettingsOpen((o) => { console.log("gear clicked, settingsOpen →", !o); return !o; }); }} title="Voice settings">
-        <FiSettings />
-      </GearBtn>
+      {ReactDOM.createPortal(
+        <GearBtn onClick={() => { setSettingsOpen((o) => { console.log("gear clicked, settingsOpen →", !o); return !o; }); }} title="Voice settings">
+          <FiSettings />
+        </GearBtn>,
+        document.body
+      )}
 
       {settingsOpen && ReactDOM.createPortal(
         <VoicePanel>
