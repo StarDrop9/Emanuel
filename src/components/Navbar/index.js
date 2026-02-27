@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaBars } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import { IconContext } from "react-icons/lib";
@@ -17,6 +17,7 @@ import { GearBtn, VoicePanel } from "../HeroSection/HeroElements";
 const Navbar = ({ toggle, onVoiceChange }) => {
   const [scrollNav, setScrollNav] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const panelRef = useRef(null);
   const [voices, setVoices] = useState([]);
   const [selectedVoiceName, setSelectedVoiceName] = useState("");
   const [rate, setRate] = useState(0.9);
@@ -44,6 +45,17 @@ const Navbar = ({ toggle, onVoiceChange }) => {
   useEffect(() => {
     if (onVoiceChange) onVoiceChange({ name: selectedVoiceName, rate });
   }, [selectedVoiceName, rate, onVoiceChange]);
+
+  useEffect(() => {
+    if (!settingsOpen) return;
+    const handler = (e) => {
+      if (panelRef.current && !panelRef.current.contains(e.target)) {
+        setSettingsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [settingsOpen]);
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -134,8 +146,11 @@ const Navbar = ({ toggle, onVoiceChange }) => {
           </NavbarContainer>
         </Nav>
         {settingsOpen && (
-          <VoicePanel>
-            <h4>Voice Settings</h4>
+          <VoicePanel ref={panelRef}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+              <h4 style={{ margin: 0 }}>Voice Settings</h4>
+              <button onClick={() => setSettingsOpen(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontSize: "18px", lineHeight: 1, padding: "2px 6px" }}>✕</button>
+            </div>
             <select value={selectedVoiceName} onChange={(e) => setSelectedVoiceName(e.target.value)}>
               {voices.map((v) => (
                 <option key={v.name} value={v.name}>{v.name} ({v.lang})</option>
