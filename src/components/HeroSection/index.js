@@ -3,12 +3,17 @@ import { useMediaQuery } from "react-responsive";
 import Desktophome from "../../components/Desktophome";
 import Mobilehome from "../../components/Mobilehome";
 import { DeviceSize } from "../../components/Responsive";
-import { HeroContainer, HeroContent, HeroBtnWrapper } from "./HeroElements";
+import { HeroContainer, HeroContent, HeroBtnWrapper, GearBtn, VoicePanel } from "./HeroElements";
+import { FiSettings } from "react-icons/fi";
 
 function HeroSection({ onParableChange }) {
   const [hover, setHover] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   const [currentParable, setCurrentParable] = useState("I Am");
+  const [voices, setVoices] = useState([]);
+  const [selectedVoiceName, setSelectedVoiceName] = useState("");
+  const [rate, setRate] = useState(0.9);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   //const [isPlaying, setIsPlaying] = useState(false);
 
   const [parables] = useState([
@@ -55,22 +60,38 @@ function HeroSection({ onParableChange }) {
     setHover(!hover);
   };
 
-  const speakText = useCallback((text) => {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.9;
-    utterance.pitch = 1.0;
-    const voices = window.speechSynthesis.getVoices();
-    const preferred = voices.find(
-      (v) =>
-        v.name.includes("Google") ||
-        v.name.includes("Samantha") ||
-        v.name.includes("Daniel")
-    );
-    if (preferred) utterance.voice = preferred;
-    window.speechSynthesis.speak(utterance);
+  useEffect(() => {
+    const load = () => {
+      const v = window.speechSynthesis.getVoices();
+      if (v.length) {
+        setVoices(v);
+        const preferred = v.find(
+          (x) =>
+            x.name.includes("Google") ||
+            x.name.includes("Samantha") ||
+            x.name.includes("Daniel")
+        );
+        setSelectedVoiceName((cur) => cur || (preferred ? preferred.name : v[0].name));
+      }
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
   }, []);
+
+  const speakText = useCallback(
+    (text) => {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = rate;
+      utterance.pitch = 1.0;
+      const v = window.speechSynthesis.getVoices();
+      const match = selectedVoiceName && v.find((x) => x.name === selectedVoiceName);
+      if (match) utterance.voice = match;
+      window.speechSynthesis.speak(utterance);
+    },
+    [rate, selectedVoiceName]
+  );
 
   const changeSaying = useCallback(
     (newSaying) => {
@@ -109,6 +130,37 @@ function HeroSection({ onParableChange }) {
 
   return (
     <HeroContainer id="home">
+      <GearBtn onClick={() => setSettingsOpen((o) => !o)} title="Voice settings">
+        <FiSettings />
+      </GearBtn>
+
+      {settingsOpen && (
+        <VoicePanel>
+          <h4>Voice Settings</h4>
+          <select
+            value={selectedVoiceName}
+            onChange={(e) => setSelectedVoiceName(e.target.value)}
+          >
+            {voices.map((v) => (
+              <option key={v.name} value={v.name}>
+                {v.name} ({v.lang})
+              </option>
+            ))}
+          </select>
+          <label>
+            Speed: {rate.toFixed(1)}x
+            <input
+              type="range"
+              min="0.5"
+              max="1.5"
+              step="0.1"
+              value={rate}
+              onChange={(e) => setRate(parseFloat(e.target.value))}
+            />
+          </label>
+        </VoicePanel>
+      )}
+
       <HeroContent>
         {!isMobile && (
           <Desktophome parables={parables} currentParable={currentParable} />

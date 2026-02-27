@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
+export { MdKeyboardArrowRight, MdArrowForward };
 
 export const HeroContainer = styled.div`
   background: #0c0c0c;
@@ -113,4 +114,89 @@ export const ArrowForward = styled(MdArrowForward)`
 export const ArrowRight = styled(MdKeyboardArrowRight)`
   margin-left: 8px;
   font-size: 20px;
+`;
+
+export const GearBtn = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 20px;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, transform 0.3s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(45deg);
+  }
+`;
+
+export const VoicePanel = styled.div`
+  position: absolute;
+  top: 66px;
+  right: 16px;
+  z-index: 10;
+  background: rgba(15, 15, 25, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 240px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  color: #fff;
+
+  h4 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+
+    option {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.55);
+
+    input[type="range"] {
+      accent-color: #a78bfa;
+      width: 100%;
+    }
+  }
 `;
