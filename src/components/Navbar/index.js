@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
@@ -10,8 +10,6 @@ import {
   NavLinks,
   NavLogo,
   NavMenu,
-  NavBtn,
-  NavBtnLink,
 } from "./NavbarElements";
 
 const Navbar = ({ toggle }) => {
@@ -42,7 +40,7 @@ const Navbar = ({ toggle }) => {
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo onClick={toggleHome} to="/">
-              Yahoveh
+              Emanuel
             </NavLogo>
             <MobileIcon onClick={toggle}>
               <FaBars color="#21adad" />
@@ -97,9 +95,9 @@ const Navbar = ({ toggle }) => {
                 </NavLinks>
               </NavItem>
             </NavMenu>
-            <NavBtn>
+            {/* <NavBtn>
               <NavBtnLink to="/signin">Sign In</NavBtnLink>
-            </NavBtn>
+            </NavBtn> */}
           </NavbarContainer>
         </Nav>
       </IconContext.Provider>

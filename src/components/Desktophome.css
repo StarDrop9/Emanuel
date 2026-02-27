@@ -123,10 +123,27 @@
   }
 }
 
+
+ @keyframes cardflip {
+  0% {transform: rotateY(0deg);}
+  100% {transform: rotateY(180deg);}    
+  }
+
+
+
+
+
 .card {
   background-color: rgb(36, 243, 147);
   animation: cardEntrance 700ms ease-out;
   animation-fill-mode: backwards;
+  transform-style: preserve-3d;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* transition: all 0.8s ease; */
 }
 
 .card:nth-child(1) {
@@ -187,3 +204,55 @@
   grid-area: 🌟;
   animation-delay: calc(13 * var(--stagger-delay));
 }
+
+
+
+
+
+
+/* THE PSUEDO CLASS CONTROLS THE FLIP ON MOUSEOVER AND MOUSEOUT */
+.card.flip {
+/*  transform: rotateY(180deg); */
+  animation: cardflip .1s;
+  animation-fill-mode: forwards;
+
+}
+
+/* THE FRONT FACE OF THE CARD, WHICH SHOWS BY DEFAULT */
+.thefront {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+/* THE BACK FACE OF THE CARD, WHICH SHOWS ON MOUSEOVER */
+.theback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: #fafafa;
+  transform: rotateY(180deg);
+}
+
+
+/*This block (starts here) is merely styling for the flip card, and is NOT an essential part of the flip code */
+.thefront h1, .theback h1{
+  font-family: 'zilla slab', sans-serif;
+  padding: 30px;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.thefront p, .theback p{
+  font-family: 'zilla slab', sans-serif;
+  padding: 30px;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+}
+

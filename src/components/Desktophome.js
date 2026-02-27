@@ -1,38 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Desktophome.css";
 
-const Desktophome = (props) => {
-  // console.log(parables)
-  const [parable, setParable] = useState("I AM");
-  let parables = props.parables;
-
-  const timer = useRef(null);
-  const isFirstRender = useRef(true);
+const Desktophome = ({ parables, currentParable }) => {
+  const [flip, setFlip] = useState(true);
+  const toggleFlip = () => setFlip((value) => !value);
 
   useEffect(() => {
-    //Goal of this code Return a random parable every 3 seconds
-    // Need to clearTimeout later in code
-    for (let i = 0; i < parables.length; i++) {
-      (function (i) {
-        timer.current = setTimeout(function () {
-          //console.log("value is ", i);
-          setParable(parables[i]);
-        }, 6000 * (i + 1));
-      })(i);
-    }
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, [parables]);
-
-  useEffect(() => {
-    if (isFirstRender.current) { isFirstRender.current = false; return; }
-    if (!parable || !('speechSynthesis' in window)) return;
-    const utterance = new SpeechSynthesisUtterance(parable);
+    if (!currentParable || !('speechSynthesis' in window)) return;
+    const utterance = new SpeechSynthesisUtterance(currentParable);
     utterance.rate = 0.8;
     utterance.pitch = 1.0;
     window.speechSynthesis.speak(utterance);
-  }, [parable]);
+  }, [currentParable]);
   return (
     <div>
       <section className="desktop-animated-grid">
@@ -80,17 +59,11 @@ const Desktophome = (props) => {
         ></div>
         <div
           className="card"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1583483425010-c566431a7710?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')",
-          }}
+          style={{ backgroundImage: "url(/assets/hope1.png)" }}
         ></div>
         <div
           className="card"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1583500557349-fb5238f8d946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')",
-          }}
+          style={{ backgroundImage: "url(/assets/hope.png)" }}
         ></div>
         <div
           className="card"
@@ -101,20 +74,33 @@ const Desktophome = (props) => {
         ></div>
         <div
           className="card"
-          style={{ backgroundImage: "url(/assets/angelwcross2.jpg)" }}
-          //style={{backgroundImage:"url('https://images.unsplash.com/photo-1583562835057-a62d1beffbf3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
+          style={{ backgroundImage: "url(/assets/JesusReaching.webp)", backgroundPosition: "top" }}
         ></div>
-        <div
-          className="card"
-          style={{ backgroundImage: "url(/assets/rollawaythestone.jpeg)" }}
-          // style={{backgroundImage:"url('https://images.unsplash.com/photo-1583518257225-f9a8081f6a84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
-        ></div>
+
+        <div onClick={() => toggleFlip()} className="card">
+          <div className="theback">
+            <h1 style={{ color: "black" }}>Back of Card</h1>
+            <p>You set flip to {flip} </p>
+          </div>
+
+          <div
+            className="thefront"
+            style={{
+              backgroundImage: "url(/assets/rollawaythestone.jpeg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* Remove the text from here */}
+          </div>
+        </div>
+
         <div
           className="card"
           style={{ backgroundColor: "black" }}
           // style={{backgroundImage:"url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
         >
-          <p className="fade-in-text">{parable}</p>
+          <p className="fade-in-text">{currentParable}</p>
           <div className="desktop-div1"></div>
         </div>
       </section>
