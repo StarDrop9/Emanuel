@@ -129,7 +129,7 @@ function HeroSection({ onParableChange }) {
 
   return (
     <HeroContainer id="home">
-      <GearBtn onClick={() => setSettingsOpen((o) => !o)} title="Voice settings">
+      <GearBtn onClick={() => { setSettingsOpen((o) => { console.log("gear clicked, settingsOpen →", !o); return !o; }); }} title="Voice settings">
         <FiSettings />
       </GearBtn>
 
