@@ -15,6 +15,7 @@ import Services from "../components/Services";
 
 function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [voiceConfig, setVoiceConfig] = useState({ name: "", rate: 0.9 });
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -23,8 +24,8 @@ function Home() {
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} />
-      <HeroSection onParableChange={(parable) => console.log(parable)} />
+      <Navbar toggle={toggle} onVoiceChange={setVoiceConfig} />
+      <HeroSection voiceConfig={voiceConfig} onParableChange={(parable) => console.log(parable)} />
       <InfoSection {...homeObjOne} />
       <InfoSection {...homeObjTwo} />
       <Services />
