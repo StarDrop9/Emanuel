@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Desktophome.css";
-import christWalkingOnWater from "../../images/ChristWalkingOnWater.jpg";
+import christWalkingOnWater from "../images/ChristWalkingOnWater.jpg";
 
 const Desktophome = ({ parables, currentParable }) => {
   const [flip, setFlip] = useState(true);
