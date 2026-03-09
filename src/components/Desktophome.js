@@ -39,11 +39,6 @@ const Desktophome = ({ parables, currentParable }) => {
           }}
         ></div>
         <div
-          className="card"
-          style={{ backgroundImage: "url(/assets/jesus2top.png)" }}
-          //style={{backgroundImage:"url('https://images.unsplash.com/photo-1583445013765-46c20c4a6772?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
-        ></div>
-        <div
           className="card card-wide"
           style={{
             backgroundImage:

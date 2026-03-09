@@ -101,7 +101,7 @@
   grid-template-areas:
     "a   b  c   d"
     "l  🌟 🌟  e"
-    "l  🌟 🌟  f"
+    "l  🌟 🌟  e"
     "j   i  h   g";
 
   grid-template-rows: 1.4fr 0.8fr 0.8fr 1.4fr;
@@ -167,28 +167,24 @@
   animation-delay: calc(5 * var(--stagger-delay));
 }
 .card:nth-child(6) {
-  grid-area: f;
+  grid-area: g;
   animation-delay: calc(6 * var(--stagger-delay));
 }
 .card:nth-child(7) {
-  grid-area: g;
+  grid-area: h;
   animation-delay: calc(7 * var(--stagger-delay));
 }
 .card:nth-child(8) {
-  grid-area: h;
+  grid-area: i;
   animation-delay: calc(8 * var(--stagger-delay));
 }
 .card:nth-child(9) {
-  grid-area: i;
+  grid-area: j;
   animation-delay: calc(9 * var(--stagger-delay));
 }
 .card:nth-child(10) {
-  grid-area: j;
-  animation-delay: calc(10 * var(--stagger-delay));
-}
-.card:nth-child(11) {
   grid-area: l;
-  animation-delay: calc(11 * var(--stagger-delay));
+  animation-delay: calc(10 * var(--stagger-delay));
 }
 
 .card:nth-child(13) {
