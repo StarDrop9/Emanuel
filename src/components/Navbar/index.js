@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FaBars } from "react-icons/fa";
-import { FiSettings } from "react-icons/fi";
+import { MdRecordVoiceOver } from "react-icons/md";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
 import {
@@ -141,7 +141,7 @@ const Navbar = ({ toggle, onVoiceChange }) => {
               <NavBtnLink to="/signin">Sign In</NavBtnLink>
             </NavBtn> */}
             <GearBtn onClick={() => setSettingsOpen((o) => !o)} title="Voice settings" style={{ position: "relative", top: "auto", right: "auto", marginLeft: "12px" }}>
-              <FiSettings />
+              <MdRecordVoiceOver />
             </GearBtn>
           </NavbarContainer>
         </Nav>
