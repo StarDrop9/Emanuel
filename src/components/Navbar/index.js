@@ -30,8 +30,8 @@ const Navbar = ({ toggle, onVoiceChange }) => {
         setSelectedVoiceName((cur) => {
           if (cur) return cur;
           const preferred =
-            v.find((x) => x.name === "Google UK English Male") ||
-            v.find((x) => x.name === "Google UK English Female") ||
+            v.find((x) => x.name.includes("Google UK English Male")) ||
+            v.find((x) => x.name.includes("Google UK English Female")) ||
             v.find((x) => x.name === "Samantha") ||
             v.find((x) => x.name.includes("Google US English")) ||
             v.find((x) => x.name.includes("Google"));

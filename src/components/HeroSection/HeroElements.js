@@ -58,11 +58,11 @@ export const VideoBg = styled.video`
 
 export const HeroContent = styled.div`
   z-index: 3;
-  margin-top: 0;
-  margin-bottom: 6%;
-  max-width: 1200px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
   position: relative;
-  padding: 8px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -91,7 +91,7 @@
 
 .desktop-animated-grid {
   width: 96vw;
-  height: calc(100vh - 80px);
+  height: 100%;
   margin-bottom: 0;
   margin-left: 2%;
   display: grid;
