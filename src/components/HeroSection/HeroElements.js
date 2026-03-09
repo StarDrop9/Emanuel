@@ -8,7 +8,7 @@ export const HeroContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 30px;
-  height: 99vh; //800px
+  height: calc(100vh - 80px);
   position: relative;
   z-index: 1;
 
@@ -58,7 +58,7 @@ export const VideoBg = styled.video`
 
 export const HeroContent = styled.div`
   z-index: 3;
-  margin-top: 18%;
+  margin-top: 0;
   margin-bottom: 6%;
   max-width: 1200px;
   position: relative;

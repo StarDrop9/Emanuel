@@ -81,7 +81,7 @@ const Desktophome = ({ parables, currentParable }) => {
             style={{
               backgroundImage: "url(/assets/rollawaythestone.jpeg)",
               backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundPosition: "top center",
             }}
           >
             {/* Remove the text from here */}

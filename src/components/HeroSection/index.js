@@ -135,17 +135,23 @@ function HeroSection({ onParableChange, voiceConfig }) {
       fallbackId = setTimeout(speakNext, fallbackMs);
     };
 
-    if ("speechSynthesis" in window) {
-      const voices = window.speechSynthesis.getVoices();
-      if (voices.length > 0) {
-        startCycle();
-      } else {
-        window.speechSynthesis.addEventListener("voiceschanged", startCycle, { once: true });
-        timeoutId = setTimeout(startCycle, 1500);
-      }
-    } else {
-      startCycle();
-    }
+    const delayedStart = () => {
+      timeoutId = setTimeout(() => {
+        if ("speechSynthesis" in window) {
+          const voices = window.speechSynthesis.getVoices();
+          if (voices.length > 0) {
+            startCycle();
+          } else {
+            window.speechSynthesis.addEventListener("voiceschanged", startCycle, { once: true });
+            timeoutId = setTimeout(startCycle, 1500);
+          }
+        } else {
+          startCycle();
+        }
+      }, 2000);
+    };
+
+    delayedStart();
 
     return () => {
       isActive = false;
