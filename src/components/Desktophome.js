@@ -53,10 +53,7 @@ const Desktophome = ({ parables, currentParable }) => {
         ></div>
         <div
           className="card"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1583468323330-9032ad490fed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')",
-          }}
+          style={{ backgroundImage: "url(/assets/JesusReaching.webp)", backgroundPosition: "top" }}
         ></div>
         <div onClick={() => toggleFlip()} className="card">
           <div className="theback">
