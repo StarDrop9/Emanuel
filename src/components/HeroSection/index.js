@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import Desktophome from "../../components/Desktophome";
 import Mobilehome from "../../components/Mobilehome";
@@ -7,7 +7,9 @@ import { HeroContainer, HeroContent, HeroBtnWrapper } from "./HeroElements";
 
 function HeroSection({ onParableChange, voiceConfig }) {
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
-  const [currentParable, setCurrentParable] = useState("I Am");
+  const [currentParable, setCurrentParable] = useState("I Am. Before Abraham was born, I am!");
+  const voiceConfigRef = useRef(voiceConfig);
+  useEffect(() => { voiceConfigRef.current = voiceConfig; }, [voiceConfig]);
 
   const [parables] = useState([
     // John 8:58
@@ -72,18 +74,19 @@ function HeroSection({ onParableChange, voiceConfig }) {
         if (onEnd) onEnd();
         return;
       }
+      const config = voiceConfigRef.current;
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = voiceConfig?.rate ?? 0.9;
+      utterance.rate = config?.rate ?? 0.9;
       utterance.pitch = 1.0;
       const v = window.speechSynthesis.getVoices();
-      const name = voiceConfig?.name;
+      const name = config?.name;
       const match = name && v.find((x) => x.name === name);
       if (match) utterance.voice = match;
       if (onEnd) utterance.onend = onEnd;
       window.speechSynthesis.speak(utterance);
     },
-    [voiceConfig]
+    [] // stable — reads voiceConfig via ref at call time
   );
 
   const changeSaying = useCallback(
@@ -97,24 +100,61 @@ function HeroSection({ onParableChange, voiceConfig }) {
 
   useEffect(() => {
     let isActive = true;
+    let started = false;
     let timeoutId;
+    let fallbackId;
+
+    const scheduleNext = (delay = 2000) => {
+      if (isActive) timeoutId = setTimeout(speakNext, delay);
+    };
 
     const speakNext = () => {
       if (!isActive) return;
+      clearTimeout(fallbackId);
       const randomSaying = parables[Math.floor(Math.random() * parables.length)];
+      const wordCount = randomSaying.split(" ").length;
+      const fallbackMs = (wordCount / (voiceConfigRef.current?.rate ?? 0.9)) * 600 + 4000;
       changeSaying(randomSaying, () => {
-        if (isActive) timeoutId = setTimeout(speakNext, 2000);
+        clearTimeout(fallbackId);
+        scheduleNext();
       });
+      fallbackId = setTimeout(scheduleNext, fallbackMs);
     };
 
-    changeSaying("I Am", () => {
-      if (isActive) timeoutId = setTimeout(speakNext, 2000);
-    });
+    const startCycle = () => {
+      if (!isActive || started) return; // prevent double-fire
+      started = true;
+      clearTimeout(timeoutId);
+      const first = parables[0];
+      const wordCount = first.split(" ").length;
+      const fallbackMs = (wordCount / (voiceConfigRef.current?.rate ?? 0.9)) * 600 + 4000;
+      changeSaying(first, () => {
+        clearTimeout(fallbackId);
+        scheduleNext();
+      });
+      fallbackId = setTimeout(speakNext, fallbackMs);
+    };
+
+    if ("speechSynthesis" in window) {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        startCycle();
+      } else {
+        window.speechSynthesis.addEventListener("voiceschanged", startCycle, { once: true });
+        timeoutId = setTimeout(startCycle, 1500);
+      }
+    } else {
+      startCycle();
+    }
 
     return () => {
       isActive = false;
       clearTimeout(timeoutId);
-      window.speechSynthesis.cancel();
+      clearTimeout(fallbackId);
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.removeEventListener("voiceschanged", startCycle);
+        window.speechSynthesis.cancel();
+      }
     };
   }, [parables, changeSaying]);
 
