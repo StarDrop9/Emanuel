@@ -4,10 +4,8 @@ export { MdKeyboardArrowRight, MdArrowForward };
 
 export const HeroContainer = styled.div`
   background: #0c0c0c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 30px;
+  display: block;
+  padding: 0;
   height: calc(100vh - 80px);
   position: relative;
   z-index: 1;
@@ -63,10 +61,6 @@ export const HeroContent = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const HeroH1 = styled.h1`

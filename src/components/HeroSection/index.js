@@ -10,6 +10,24 @@ function HeroSection({ onParableChange, voiceConfig }) {
   const [currentParable, setCurrentParable] = useState("I Am. Before Abraham was born, I am!");
   const voiceConfigRef = useRef(voiceConfig);
   useEffect(() => { voiceConfigRef.current = voiceConfig; }, [voiceConfig]);
+  const currentParableRef = useRef("I Am. Before Abraham was born, I am!");
+
+  // Unlock audio on first user click (browser autoplay policy)
+  useEffect(() => {
+    const unlock = () => {
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(currentParableRef.current);
+        const config = voiceConfigRef.current;
+        utterance.rate = config?.rate ?? 0.9;
+        const v = window.speechSynthesis.getVoices();
+        const match = config?.name && v.find((x) => x.name === config.name);
+        if (match) utterance.voice = match;
+        window.speechSynthesis.speak(utterance);
+      }
+    };
+    document.addEventListener("click", unlock, { once: true });
+    return () => document.removeEventListener("click", unlock);
+  }, []);
 
   const [parables] = useState([
     // John 8:58
@@ -91,6 +109,7 @@ function HeroSection({ onParableChange, voiceConfig }) {
 
   const changeSaying = useCallback(
     (newSaying, onEnd) => {
+      currentParableRef.current = newSaying;
       setCurrentParable(newSaying);
       speakText(newSaying, onEnd);
       if (onParableChange) onParableChange(newSaying);
