@@ -44,6 +44,7 @@ export const homeObjThree = {
   description:
     "Start praying to be close to him, accept Christ, accept eternal life.",
   buttonLabel: "Start Now",
+  href: "https://wisdom-align.vercel.app/",
   imgStart: false,
   img: require("../../images/JesusCallingU.png"),
   alt: "Papers",
