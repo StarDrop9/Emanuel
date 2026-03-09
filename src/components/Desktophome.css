@@ -104,7 +104,7 @@
     "k  🌟 🌟  f"
     "j   i  h   g";
 
-  grid-template-rows: 1.4fr, 0.8fr, 0.8fr, 1.4fr;
+  grid-template-rows: 1.4fr 0.8fr 0.8fr 1.4fr;
   grid-template-columns: 15% auto auto 15%;
 
   --stagger-delay: 100ms;

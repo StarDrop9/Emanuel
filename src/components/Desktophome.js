@@ -6,7 +6,7 @@ const Desktophome = ({ parables, currentParable }) => {
   const toggleFlip = () => setFlip((value) => !value);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <section className="desktop-animated-grid">
         <div
           className="card"
