@@ -26,7 +26,8 @@ function HeroSection({ onParableChange, voiceConfig }) {
       }
     };
     document.addEventListener("click", unlock, { once: true });
-    return () => document.removeEventListener("click", unlock);
+    const autoClick = setTimeout(() => document.dispatchEvent(new MouseEvent("click")), 1000);
+    return () => { document.removeEventListener("click", unlock); clearTimeout(autoClick); };
   }, []);
 
   const [parables] = useState([
