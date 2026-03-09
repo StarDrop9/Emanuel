@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Desktophome.css";
+import christWalkingOnWater from "../../images/ChristWalkingOnWater.jpg";
 
 const Desktophome = ({ parables, currentParable }) => {
   const [flip, setFlip] = useState(true);
@@ -40,7 +41,7 @@ const Desktophome = ({ parables, currentParable }) => {
         ></div>
         <div
           className="card card-wide"
-          style={{ backgroundImage: "url(/assets/ChristWalkingOnWater.jpg)" }}
+          style={{ backgroundImage: `url(${christWalkingOnWater})` }}
         ></div>
         <div
           className="card"
