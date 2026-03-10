@@ -19,6 +19,7 @@ export const homeObjOne = {
 export const homeObjTwo = {
   id: "discover",
   lightBg: true,
+  splitBg: true,
   lightText: false,
   lightTextDesc: false,
   topLine: "Unlimited Access to Heaven",

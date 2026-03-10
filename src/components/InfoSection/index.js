@@ -17,6 +17,7 @@ import {
 
 const InfoSection = ({
   lightBg,
+  splitBg,
   imgStart,
   topLine,
   lightText,
@@ -35,7 +36,7 @@ const InfoSection = ({
   //console.log(primary);
   return (
     <>
-      <InfoContainer lightBg={lightBg} id={id}>
+      <InfoContainer lightBg={lightBg} splitBg={splitBg} id={id}>
         <InfoWrapper>
           <InfoRow imgStart={imgStart}>
             <Column1>
