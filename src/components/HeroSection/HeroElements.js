@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
 export { MdKeyboardArrowRight, MdArrowForward };
 
@@ -132,6 +132,33 @@ export const GearBtn = styled.button`
     background: rgba(255, 255, 255, 0.25);
     transform: rotate(45deg);
   }
+`;
+
+const waveAnim = keyframes`
+  0%, 100% { transform: scaleY(0.25); }
+  50%       { transform: scaleY(1); }
+`;
+
+export const WaveBar = styled.span`
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  transform-origin: bottom;
+  background: ${({ $active }) => ($active ? "#22c55e" : "#ef4444")};
+  height: ${({ $h }) => $h}px;
+  ${({ $active, $delay }) =>
+    $active
+      ? css`
+          animation: ${waveAnim} 0.7s ease-in-out ${$delay}s infinite;
+        `
+      : ""}
+`;
+
+export const WaveIconWrap = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 18px;
 `;
 
 export const VoicePanel = styled.div`

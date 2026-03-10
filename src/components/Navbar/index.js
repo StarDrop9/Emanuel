@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
-import { MdRecordVoiceOver, MdVoiceOverOff } from "react-icons/md";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
 import {
@@ -12,163 +11,75 @@ import {
   NavLogo,
   NavMenu,
 } from "./NavbarElements";
-import { GearBtn, VoicePanel } from "../HeroSection/HeroElements";
+import { GearBtn, WaveBar, WaveIconWrap } from "../HeroSection/HeroElements";
 
-const Navbar = ({ toggle, onVoiceChange }) => {
+const BAR_HEIGHTS = [8, 13, 18, 13, 8];
+const BAR_DELAYS  = [0, 0.1, 0.2, 0.1, 0];
+
+const Navbar = ({ toggle, onVoiceChange, voiceOn, onVoiceToggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const panelRef = useRef(null);
-  const [voices, setVoices] = useState([]);
-  const [selectedVoiceName, setSelectedVoiceName] = useState("");
-  const [rate, setRate] = useState(0.9);
 
+  // Pick best available voice once on load
   useEffect(() => {
     const load = () => {
       const v = window.speechSynthesis.getVoices();
-      if (v.length) {
-        setVoices(v);
-        setSelectedVoiceName((cur) => {
-          if (cur) return cur;
-          const preferred =
-            v.find((x) => x.name.includes("Google UK English Male")) ||
-            v.find((x) => x.name.includes("Google UK English Female")) ||
-            v.find((x) => x.name === "Samantha") ||
-            v.find((x) => x.name.includes("Google US English")) ||
-            v.find((x) => x.name.includes("Google"));
-          return preferred ? preferred.name : v[0].name;
-        });
-      }
+      if (!v.length) return;
+      const preferred =
+        v.find((x) => x.name.includes("Google UK English Male")) ||
+        v.find((x) => x.name.includes("Google UK English Female")) ||
+        v.find((x) => x.name === "Samantha") ||
+        v.find((x) => x.name.includes("Google US English")) ||
+        v.find((x) => x.name.includes("Google"));
+      if (onVoiceChange) onVoiceChange({ name: preferred ? preferred.name : v[0].name, rate: 0.9 });
     };
     load();
     window.speechSynthesis.onvoiceschanged = load;
-  }, []);
+  }, [onVoiceChange]);
 
   useEffect(() => {
-    if (onVoiceChange) onVoiceChange({ name: selectedVoiceName, rate });
-  }, [selectedVoiceName, rate, onVoiceChange]);
-
-  useEffect(() => {
-    if (!settingsOpen) return;
-    const handler = (e) => {
-      if (panelRef.current && !panelRef.current.contains(e.target)) {
-        setSettingsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [settingsOpen]);
-
-  const changeNav = () => {
-    if (window.scrollY >= 80) {
-      setScrollNav(true);
-    } else {
-      setScrollNav(false);
-    }
-  };
-
-  useEffect(() => {
+    const changeNav = () => setScrollNav(window.scrollY >= 80);
     window.addEventListener("scroll", changeNav);
-
-    //kps add 09/25 clean up function
-    return window.removeEventListener("scroll", changeNav);
+    return () => window.removeEventListener("scroll", changeNav);
   }, []);
-
-  const toggleHome = () => {
-    scroll.scrollToTop();
-  };
 
   return (
-    <>
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <Nav scrollNav={scrollNav}>
-          <NavbarContainer>
-            <NavLogo onClick={toggleHome} to="/">
-              Emanuel
-            </NavLogo>
-            <MobileIcon onClick={toggle}>
-              <FaBars color="#21adad" />
-            </MobileIcon>
-            <NavMenu>
-              <NavItem>
-                <NavLinks
-                  to="about"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  About
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks
-                  to="discover"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Discover
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks
-                  to="services"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Services
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks
-                  to="signup"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Get Started!
-                </NavLinks>
-              </NavItem>
-            </NavMenu>
-            {/* <NavBtn>
-              <NavBtnLink to="/signin">Sign In</NavBtnLink>
-            </NavBtn> */}
-            <GearBtn onClick={() => window.speechSynthesis.cancel()} title="Stop speaking" style={{ position: "relative", top: "auto", right: "auto", marginLeft: "8px" }}>
-              <MdVoiceOverOff />
-            </GearBtn>
-            <GearBtn onClick={() => setSettingsOpen((o) => !o)} title="Voice settings" style={{ position: "relative", top: "auto", right: "auto", marginLeft: "8px" }}>
-              <MdRecordVoiceOver />
-            </GearBtn>
-          </NavbarContainer>
-        </Nav>
-        {settingsOpen && (
-          <VoicePanel ref={panelRef}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-              <h4 style={{ margin: 0 }}>Voice Settings</h4>
-              <button onClick={() => setSettingsOpen(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontSize: "18px", lineHeight: 1, padding: "2px 6px" }}>✕</button>
-            </div>
-            <select value={selectedVoiceName} onChange={(e) => setSelectedVoiceName(e.target.value)}>
-              {voices.map((v) => (
-                <option key={v.name} value={v.name}>{v.name} ({v.lang})</option>
+    <IconContext.Provider value={{ color: "#fff" }}>
+      <Nav scrollNav={scrollNav}>
+        <NavbarContainer>
+          <NavLogo onClick={() => scroll.scrollToTop()} to="/">
+            Emanuel
+          </NavLogo>
+          <MobileIcon onClick={toggle}>
+            <FaBars color="#21adad" />
+          </MobileIcon>
+          <NavMenu>
+            <NavItem>
+              <NavLinks to="about" smooth duration={500} spy exact="true" offset={-80}>About</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="discover" smooth duration={500} spy exact="true" offset={-80}>Discover</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="services" smooth duration={500} spy exact="true" offset={-80}>Services</NavLinks>
+            </NavItem>
+            <NavItem>
+              <NavLinks to="signup" smooth duration={500} spy exact="true" offset={-80}>Get Started!</NavLinks>
+            </NavItem>
+          </NavMenu>
+          <GearBtn
+            onClick={onVoiceToggle}
+            title={voiceOn ? "Stop voice" : "Start voice"}
+            style={{ position: "relative", top: "auto", right: "auto", marginLeft: "8px" }}
+          >
+            <WaveIconWrap>
+              {BAR_HEIGHTS.map((h, i) => (
+                <WaveBar key={i} $active={voiceOn} $h={h} $delay={BAR_DELAYS[i]} />
               ))}
-            </select>
-            <label>
-              Speed: {rate.toFixed(1)}x
-              <input type="range" min="0.5" max="1.5" step="0.1" value={rate}
-                onChange={(e) => setRate(parseFloat(e.target.value))} />
-            </label>
-          </VoicePanel>
-        )}
-      </IconContext.Provider>
-    </>
+            </WaveIconWrap>
+          </GearBtn>
+        </NavbarContainer>
+      </Nav>
+    </IconContext.Provider>
   );
 };
 

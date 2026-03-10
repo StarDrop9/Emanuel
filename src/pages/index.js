@@ -16,16 +16,20 @@ import Services from "../components/Services";
 function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [voiceConfig, setVoiceConfig] = useState({ name: "", rate: 0.9 });
+  const [voiceOn, setVoiceOn] = useState(true);
 
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggle = () => setIsOpen(!isOpen);
 
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} onVoiceChange={setVoiceConfig} />
-      <HeroSection voiceConfig={voiceConfig} onParableChange={(parable) => console.log(parable)} />
+      <Navbar
+        toggle={toggle}
+        onVoiceChange={setVoiceConfig}
+        voiceOn={voiceOn}
+        onVoiceToggle={() => setVoiceOn((v) => !v)}
+      />
+      <HeroSection voiceConfig={voiceConfig} voiceEnabled={voiceOn} onParableChange={(parable) => console.log(parable)} />
       <InfoSection {...homeObjOne} />
       <InfoSection {...homeObjTwo} />
       <Services />

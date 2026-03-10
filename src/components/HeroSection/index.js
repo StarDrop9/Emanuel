@@ -5,7 +5,7 @@ import Mobilehome from "../../components/Mobilehome";
 import { DeviceSize } from "../../components/Responsive";
 import { HeroContainer, HeroContent, HeroBtnWrapper } from "./HeroElements";
 
-function HeroSection({ onParableChange, voiceConfig }) {
+function HeroSection({ onParableChange, voiceConfig, voiceEnabled = true }) {
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   const [currentParable, setCurrentParable] = useState("I Am. Before Abraham was born, I am!");
   const voiceConfigRef = useRef(voiceConfig);
@@ -118,7 +118,16 @@ function HeroSection({ onParableChange, voiceConfig }) {
     [onParableChange, speakText]
   );
 
+  // Stop speech immediately when voiceEnabled turns off
   useEffect(() => {
+    if (!voiceEnabled && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  }, [voiceEnabled]);
+
+  useEffect(() => {
+    if (!voiceEnabled) return;
+
     let isActive = true;
     let started = false;
     let timeoutId;
@@ -182,7 +191,7 @@ function HeroSection({ onParableChange, voiceConfig }) {
         window.speechSynthesis.cancel();
       }
     };
-  }, [parables, changeSaying]);
+  }, [parables, changeSaying, voiceEnabled]);
 
   return (
     <HeroContainer id="home">
