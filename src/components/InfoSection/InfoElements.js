@@ -30,7 +30,7 @@ export const InfoWrapper = styled.div`
 export const InfoRow = styled.div`
   display: grid;
   grid-auto-columns: minmax(auto, 1fr);
-  align-items: center;
+  align-items: ${({ $imgFull }) => ($imgFull ? 'stretch' : 'center')};
   grid-template-areas: ${({ imgStart }) =>
     imgStart ? "'col2 col1'" : "'col1 col2'"};
   /* Must use '\' css class \'' */
@@ -51,6 +51,11 @@ export const Column2 = styled.div`
   margin-bottom: 15px;
   padding: 0 15px;
   grid-area: col2;
+  ${({ $imgFull }) => $imgFull && `
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  `}
 `;
 
 export const TextWrapper = styled.div`
@@ -97,6 +102,11 @@ export const BtnWrap = styled.div`
 export const ImgWrap = styled.div`
   max-width: 555px;
   height: 100%;
+  ${({ $imgFull }) => $imgFull && `
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+  `}
 `;
 
 export const Img = styled.img`
@@ -106,4 +116,10 @@ export const Img = styled.img`
   margin-left: 10px;
   padding-right: 0;
   border-radius: 10px;
+  ${({ $imgFull }) => $imgFull && `
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    margin-left: 0;
+  `}
 `;

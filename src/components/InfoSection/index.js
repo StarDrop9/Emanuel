@@ -18,6 +18,7 @@ import {
 const InfoSection = ({
   lightBg,
   splitBg,
+  imgFullHeight,
   imgStart,
   topLine,
   lightText,
@@ -38,7 +39,7 @@ const InfoSection = ({
     <>
       <InfoContainer lightBg={lightBg} splitBg={splitBg} id={id}>
         <InfoWrapper>
-          <InfoRow imgStart={imgStart}>
+          <InfoRow imgStart={imgStart} $imgFull={imgFullHeight}>
             <Column1>
               <TextWrapper>
                 <TopLine>{topLine}</TopLine>
@@ -68,9 +69,9 @@ const InfoSection = ({
                 </BtnWrap>
               </TextWrapper>
             </Column1>
-            <Column2>
-              <ImgWrap>
-                <Img src={img} alt={alt} />
+            <Column2 $imgFull={imgFullHeight}>
+              <ImgWrap $imgFull={imgFullHeight}>
+                <Img src={img} alt={alt} $imgFull={imgFullHeight} />
               </ImgWrap>
             </Column2>
           </InfoRow>
