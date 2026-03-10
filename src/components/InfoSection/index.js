@@ -38,7 +38,7 @@ const InfoSection = ({
   return (
     <>
       <InfoContainer lightBg={lightBg} splitBg={splitBg} id={id}>
-        <InfoWrapper>
+        <InfoWrapper $imgFull={imgFullHeight}>
           <InfoRow imgStart={imgStart} $imgFull={imgFullHeight}>
             <Column1>
               <TextWrapper>

@@ -8,19 +8,21 @@ export const InfoContainer = styled.div`
       : lightBg
       ? '#f9f9f9'
       : '#010606'};
+  ${({ splitBg }) => splitBg && `height: 90vh; overflow: hidden;`}
 
   @media screen and (max-width: 768px) {
     padding: 100px 0;
+    height: auto;
   }
 `;
 
 export const InfoWrapper = styled.div`
   display: grid;
   z-index: 1;
-  height: 80vh;      //860px;
+  height: ${({ $imgFull }) => ($imgFull ? '100%' : '80vh')};
   width: 100%;
   max-width: 1100px;
-  margin-top:10%;
+  margin-top: ${({ $imgFull }) => ($imgFull ? '0' : '10%')};
   margin-right: auto;
   margin-left: auto;
   padding: 0 24px;
