@@ -5,9 +5,23 @@ import Mobilehome from "../../components/Mobilehome";
 import { DeviceSize } from "../../components/Responsive";
 import { HeroContainer, HeroContent, HeroBtnWrapper } from "./HeroElements";
 
+const PARABLE_COLORS = [
+  "#FFD700", // gold
+  "#87CEEB", // sky blue
+  "#DDA0DD", // plum
+  "#98FF98", // mint
+  "#FFDAB9", // peach
+  "#E6E6FA", // lavender
+  "#F4A460", // sandy gold
+  "#B0E0E6", // powder blue
+  "#FFB6C1", // light rose
+  "#ADFF2F", // green yellow
+];
+
 function HeroSection({ onParableChange, voiceConfig, voiceEnabled = true }) {
   const isMobile = useMediaQuery({ maxWidth: DeviceSize.mobile });
   const [currentParable, setCurrentParable] = useState("I Am. Before Abraham was born, I am!");
+  const [colorIndex, setColorIndex] = useState(0);
   const voiceConfigRef = useRef(voiceConfig);
   useEffect(() => { voiceConfigRef.current = voiceConfig; }, [voiceConfig]);
   const currentParableRef = useRef("I Am. Before Abraham was born, I am!");
@@ -112,6 +126,7 @@ function HeroSection({ onParableChange, voiceConfig, voiceEnabled = true }) {
     (newSaying, onEnd) => {
       currentParableRef.current = newSaying;
       setCurrentParable(newSaying);
+      setColorIndex((i) => (i + 1) % PARABLE_COLORS.length);
       speakText(newSaying, onEnd);
       if (onParableChange) onParableChange(newSaying);
     },
@@ -197,10 +212,10 @@ function HeroSection({ onParableChange, voiceConfig, voiceEnabled = true }) {
     <HeroContainer id="home">
       <HeroContent>
         {!isMobile && (
-          <Desktophome parables={parables} currentParable={currentParable} />
+          <Desktophome parables={parables} currentParable={currentParable} parableColor={PARABLE_COLORS[colorIndex]} />
         )}
         {isMobile && (
-          <Mobilehome parables={parables} currentParable={currentParable} />
+          <Mobilehome parables={parables} currentParable={currentParable} parableColor={PARABLE_COLORS[colorIndex]} />
         )}
         <HeroBtnWrapper></HeroBtnWrapper>
       </HeroContent>

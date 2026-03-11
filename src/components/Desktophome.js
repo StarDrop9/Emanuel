@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Desktophome.css";
 import christWalkingOnWater from "../images/ChristWalkingOnWater.jpg";
 
-const Desktophome = ({ parables, currentParable }) => {
+const Desktophome = ({ parables, currentParable, parableColor }) => {
   const [flip, setFlip] = useState(true);
   const toggleFlip = () => setFlip((value) => !value);
 
@@ -75,7 +75,7 @@ const Desktophome = ({ parables, currentParable }) => {
           style={{ backgroundColor: "black" }}
           // style={{backgroundImage:"url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')"}}
         >
-          <p className="fade-in-text">{currentParable}</p>
+          <p className="fade-in-text" style={{ color: parableColor }}>{currentParable}</p>
           <div className="desktop-div1"></div>
         </div>
       </section>
