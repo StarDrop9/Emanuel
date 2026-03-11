@@ -69,7 +69,7 @@ const Navbar = ({ toggle, onVoiceChange, voiceOn, onVoiceToggle }) => {
           <GearBtn
             onClick={onVoiceToggle}
             title={voiceOn ? "Stop voice" : "Start voice"}
-            style={{ position: "relative", top: "auto", right: "auto", marginLeft: "8px" }}
+            style={{ position: "relative", top: "auto", right: "auto", marginLeft: "8px", alignSelf: "center" }}
           >
             <WaveIconWrap>
               {BAR_HEIGHTS.map((h, i) => (
